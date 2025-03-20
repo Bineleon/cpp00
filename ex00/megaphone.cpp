@@ -6,12 +6,11 @@
 /*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:15:41 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/20 11:18:18 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:36:02 by nelbi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cctype>
 
 void     empty_megaphone(void)
 {
@@ -28,8 +27,7 @@ std::string    megaphone(char **av)
     len = input.length();
     for (int i = 0; i < len; i++)
     {
-        if (std::isalpha(input[i]))
-            input[i] = std::toupper(input[i]);
+        input[i] = std::toupper(input[i]);
     }
     return input;
 }

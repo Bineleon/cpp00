@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 11:27:12 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/20 18:27:58 by nelbi            ###   ########.fr       */
+/*   Created: 2025/03/20 18:05:21 by nelbi             #+#    #+#             */
+/*   Updated: 2025/03/20 18:39:23 by nelbi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#ifndef CONTACT_H
+# define CONTACT_H
 
-#include "Contact.hpp"
+#include <iostream>
 
-class PhoneBook
+class Contact
 {
     public :
-            PhoneBook(void);
+        
 
+    private :
+            std::string firstName;
+            std::string lastName;
+            std::string nickname;
+            std::string number;
+            std::string darkestSecret;
 };
 
 #endif
