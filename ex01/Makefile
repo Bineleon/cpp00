@@ -6,7 +6,7 @@
 #    By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 11:24:02 by nelbi             #+#    #+#              #
-#    Updated: 2025/03/20 11:26:06 by nelbi            ###   ########.fr        #
+#    Updated: 2025/03/24 18:01:20 by nelbi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME 				= phonebook
 CC					= c++
 FLAGS				= -Wall -Werror -Wextra -std=c++98
 
-SRCS				= *.cpp
+SRCS				= Contact.cpp PhoneBook.cpp main.cpp
 
 RM					= rm -rf
 OBJS				= ${SRCS:.cpp=.o}
