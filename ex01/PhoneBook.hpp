@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
+/*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:27:12 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/24 19:08:45 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/25 18:29:35 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ class PhoneBook
 			PhoneBook(void);
 			~PhoneBook(void);
 			void display(void);
+			void add(void);
+			void search(std::string index);
+			const Contact* getContacts(void) const;
+			void setContacts(std::string userEntry);
+			std::string	formatEntry(std::string userEntry);
 
 	private :
 			Contact _contacts[8];

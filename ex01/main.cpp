@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
+/*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:46:28 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/24 19:09:32 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/25 18:17:33 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void    processChoice(std::string userChoice)
 
     if (userChoice == "ADD")
     {
-        return;
-        // add();
+		phoneBook.add();
     }
     else if (userChoice == "SEARCH")
         phoneBook.display();
@@ -34,18 +33,25 @@ void    processChoice(std::string userChoice)
 int main(void)
 {
     std::string userChoice;
+	PhoneBook   phoneBook;
 
     std::cout << "\033[1;32m************Welcome to : the PHONEBOOK************\e[0m" << std::endl;
-    std::cout << "\033[0;32m           You can ADD, SEARCH or EXIT\e[0m" << std::endl;
-    std::cout << userChoice << std::endl;
     while (1)
     {
-        std::cin >> userChoice;
-        if (userChoice == "EXIT")
-            break;
-        else
-            processChoice(userChoice);
-
+		std::cout << "\033[0;32m           You can ADD, SEARCH or EXIT\e[0m" << std::endl;
+		if (!(std::cin >> userChoice))
+			break;
+		if (userChoice == "EXIT")
+			break;
+		else if (userChoice == "ADD")
+			phoneBook.add();
+		else if (userChoice == "SEARCH")
+			phoneBook.display();
+		else
+		{
+			std::cout << "\033[1;31mPlease enter a valid option :\e[0m" << std::endl;
+			std::cout << "\033[0;32mADD, SEARCH or EXIT\e[0m" << std::endl;
+		}
     }
     return 0;
 }
