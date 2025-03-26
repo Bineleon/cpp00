@@ -6,7 +6,7 @@
 /*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:37:49 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/25 17:31:57 by neleon           ###   ########.fr       */
+/*   Updated: 2025/03/26 14:42:47 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact destructor called" << std::endl;
+	// std::cout << "Contact destructor called" << std::endl;
 	return;
 }
 
 Contact::Contact(void)
 {
-    std::cout << "Contact constructor called" << std::endl;
+    // std::cout << "Contact constructor called" << std::endl;
 	return;
 }
 

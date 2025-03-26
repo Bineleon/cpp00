@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
+/*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:11 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/26 12:25:47 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/26 16:17:52 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ PhoneBook::PhoneBook(void)
 	return;
 }
 
-std::string	formatEntry(std::string userEntry)
+std::string	formatEntry(std::string userInput)
 {
 	std::string formated;
-	int len = userEntry.size();
+	int len = userInput.size();
 
-	formated = userEntry;
+	formated = userInput;
 	if (len == 10)
         return formated;
 	else if (len > 9)
         return formated.replace(9, len, ".");
     else
-        return std::string(10 - len, ' ') + userEntry;
+        return std::string(10 - len, ' ') + userInput;
 }
 
 void	PhoneBook::display(void)
@@ -60,31 +60,47 @@ void	PhoneBook::display(void)
 
 }
 
-void	PhoneBook::search(int index)
+void	PhoneBook::searchContact(int index)
 {
-    std::cout << "   First name      : " << _contacts[index].getFirstName() << std::endl;
-    std::cout << "   Last name       : " << _contacts[index].getLastName() << std::endl;
+	std::cout << "\033[0;33m";
+    std::cout << "🙂 First name      : " << _contacts[index].getFirstName() << std::endl;
+    std::cout << "🤗 Last name       : " << _contacts[index].getLastName() << std::endl;
     std::cout << "😎 Nickname        : " << _contacts[index].getNickname() << std::endl;
     std::cout << "📞 Phone number    : " << _contacts[index].getPhoneNumber() << std::endl;
-    std::cout << "🕵️  Darkest secret  : " << _contacts[index].getDarkestSecret() << std::endl;
-    return;
+    std::cout << "😈 Darkest secret  : " << _contacts[index].getDarkestSecret() << std::endl;
+	std::cout << "\033[0m";
+	return;
 }
 
 
 void	intputEof(void)
 {
 	std::cout << "\033[1;31mInput interrupted or error. Aborting add.\e[0m" << std::endl;
-	std::cin.clear();
+	// std::cin.clear();
 	return;
+}
+
+bool	isValidPhoneNumber(std::string userInput)
+{
+	int len = userInput.size();
+	
+	for (int i = 0; i < len; i++)
+	{
+		if (!isdigit(userInput[i]) && userInput[i] != ' ')
+			return (false);
+	}
+	return true;
 }
 
 void	PhoneBook::add(void)
 {
 	static	int contactCount;
+	bool	validNum;
 	std::string	tmp;
 
+	validNum = false;
 	if (contactCount == 7)
-		contactCount == 0;
+		contactCount = 0;
 	std::cout << "Enter contact's first name :" << std::endl;
 	std::cout << "> ";
 	if (!(std::cin >> tmp))
@@ -103,11 +119,24 @@ void	PhoneBook::add(void)
 		return intputEof();
 	 _contacts[contactCount].setNickname(tmp);
 
-	std::cout << "Enter contact's phone number :" << std::endl;
-	std::cout << "> ";
-	if (!(std::cin >> tmp))
-		return intputEof();
-	_contacts[contactCount].setPhoneNumber(tmp);
+	while (!validNum)
+	{
+		std::cout << "Enter contact's phone number :" << std::endl;
+		std::cout << "> ";
+		if (!(std::cin >> tmp))
+			return intputEof();
+		if (!isValidPhoneNumber(tmp))
+		{
+			std::cout << "\033[1;31mPlease enter a valid phone number (digits only)\e[0m" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');	
+		}
+		else
+		{
+			validNum = true;
+			_contacts[contactCount].setPhoneNumber(tmp);
+		}
+	}
 
 	std::cout << "Enter contact's darkest secret :" << std::endl;
 	std::cout << "> ";
@@ -117,6 +146,40 @@ void	PhoneBook::add(void)
 
 	contactCount++;
 	return;
+}
+
+void PhoneBook::search(void)
+{
+	int index;
+
+	display();
+	std::cout << "\033[0;36mEnter contact's index to display informations (1 to 8):\e[0m" << std::endl;
+	while (1)
+	{
+		std::cout << "> ";
+		if (!(std::cin >> index))
+		{
+			if (std::cin.eof())
+			{
+				std::cout << "\033[1;31mInput stream closed. Exiting search.\e[0m" << std::endl;
+				std::cin.clear();
+				break;
+			}
+			std::cout << "\033[1;31mInvalid input. Please enter a number between 1 and 8.\e[0m" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		}
+		else if (index < 1 || index > 8)
+			std::cout << "\033[1;31mIndex out of range. Please enter an index between 1 and 8.\e[0m" << std::endl;
+		else if (_contacts[index - 1].getFirstName().empty())
+			std::cout << "\033[1;31mContact does not exist yet, please enter a valid index.\e[0m" << std::endl;
+		else
+		{
+			std::cout << std::endl;
+			searchContact(index - 1);
+			break;
+		}
+	}
 }
 
 const Contact* PhoneBook::getContacts(void) const
