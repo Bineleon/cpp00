@@ -6,7 +6,7 @@
 /*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:11 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/26 11:29:40 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/26 11:40:23 by nelbi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,15 @@ void	PhoneBook::display(void)
 
 }
 
-// void	PhoneBook::search(std::string index)
-// {
-
-// 	return;
-// }
+void	PhoneBook::search(int index)
+{
+    std::cout << _contacts[index].getFirstName() << std::endl;
+    std::cout << _contacts[index].getLastName() << std::endl;
+    std::cout << _contacts[index].getNickname() << std::endl;
+    std::cout << _contacts[index].getPhoneNumber() << std::endl;
+    std::cout << _contacts[index].getDarkestSecret() << std::endl;
+    return;
+}
 
 void	intputEof(void)
 {

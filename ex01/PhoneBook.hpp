@@ -6,7 +6,7 @@
 /*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:27:12 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/26 11:20:59 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/26 11:36:13 by nelbi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class PhoneBook
 			~PhoneBook(void);
 			void display(void);
 			void add(void);
-			void search(std::string index);
+			void search(int index);
 			const Contact* getContacts(void) const;
 			void setContacts(std::string userEntry);
 			// std::string	formatEntry(std::string userEntry);
