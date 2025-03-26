@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+         #
+#    By: neleon <neleon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 10:02:14 by nelbi             #+#    #+#              #
-#    Updated: 2025/03/20 10:24:40 by nelbi            ###   ########.fr        #
+#    Updated: 2025/03/26 16:43:02 by neleon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,23 @@ GREEN				= \033[0;32m\e[1m
 
 NAME 				= megaphone
 CC					= c++
-FLAGS				= -Wall -Werror -Wextra -std=c++98
+FLAGS				= -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
+SRC_DIR				= .
 SRCS				= megaphone.cpp
 
 RM					= rm -rf
-OBJS				= ${SRCS:.cpp=.o}
+OBJS_DIR			= ./objs/
+
+OBJS_FILES 			= ${SRCS:.cpp=.o}
+
+OBJS				= ${addprefix ${OBJS_DIR}, ${OBJS_FILES}}
+
+DEPS				= ${OBJS:.o=.d}
+
+${OBJS_DIR}%.o: ${SRC_DIR}/%.cpp
+	@mkdir -p ${@D}
+	@${CC} ${FLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	@${CC} ${FLAGS} ${OBJS} -o ${NAME}
@@ -29,11 +40,14 @@ ${NAME}: ${OBJS}
 all: ${NAME}
 
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${OBJS_DIR} ${DEPS}
 	@echo "${GREEN}Clean		: DONE!${RESET}"
 
 fclean: clean
 	@${RM} ${NAME}
+	@echo "${GREEN}Full Clean	: DONE!${RESET}"
+
+-include ${DEPS}
 
 re: fclean all
 

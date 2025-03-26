@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
+/*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:15:41 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/20 18:36:02 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/26 16:24:08 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ std::string    megaphone(char **av)
     std::string input = *av;
     len = input.length();
     for (int i = 0; i < len; i++)
-    {
         input[i] = std::toupper(input[i]);
-    }
     return input;
 }
 

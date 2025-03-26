@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+         #
+#    By: neleon <neleon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 11:24:02 by nelbi             #+#    #+#              #
-#    Updated: 2025/03/26 11:08:13 by nelbi            ###   ########.fr        #
+#    Updated: 2025/03/26 16:30:14 by neleon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ clean:
 
 fclean: clean
 	@${RM} ${NAME}
+	@echo "${GREEN}Full Clean	: DONE!${RESET}"
 
 -include ${DEPS}
 

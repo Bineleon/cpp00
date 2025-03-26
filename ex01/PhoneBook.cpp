@@ -6,7 +6,7 @@
 /*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:11 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/26 16:17:52 by neleon           ###   ########.fr       */
+/*   Updated: 2025/03/26 17:09:39 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	PhoneBook::display(void)
 	std::cout << "║     index|first name| last name|  nickname║" << std::endl;
 	std::cout << "║-------------------------------------------║" << std::endl;
 
-	for (int i = 0; i <= 8; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		if (_contacts[i].getFirstName().empty())
 			break;
@@ -99,7 +99,7 @@ void	PhoneBook::add(void)
 	std::string	tmp;
 
 	validNum = false;
-	if (contactCount == 7)
+	if (contactCount == 8)
 		contactCount = 0;
 	std::cout << "Enter contact's first name :" << std::endl;
 	std::cout << "> ";
@@ -162,12 +162,16 @@ void PhoneBook::search(void)
 			if (std::cin.eof())
 			{
 				std::cout << "\033[1;31mInput stream closed. Exiting search.\e[0m" << std::endl;
-				std::cin.clear();
 				break;
 			}
 			std::cout << "\033[1;31mInvalid input. Please enter a number between 1 and 8.\e[0m" << std::endl;
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');
+		}
+		else if (index == 1 &&_contacts[index - 1].getFirstName().empty())
+		{
+			std::cout << "\033[1;33mThe Phonebook is empty 🤷! First add a contact :\e[0m" << std::endl;
+			break;	
 		}
 		else if (index < 1 || index > 8)
 			std::cout << "\033[1;31mIndex out of range. Please enter an index between 1 and 8.\e[0m" << std::endl;
