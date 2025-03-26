@@ -6,7 +6,7 @@
 /*   By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:11 by nelbi             #+#    #+#             */
-/*   Updated: 2025/03/26 11:40:23 by nelbi            ###   ########.fr       */
+/*   Updated: 2025/03/26 12:25:47 by nelbi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	PhoneBook::display(void)
 
 void	PhoneBook::search(int index)
 {
-    std::cout << _contacts[index].getFirstName() << std::endl;
-    std::cout << _contacts[index].getLastName() << std::endl;
-    std::cout << _contacts[index].getNickname() << std::endl;
-    std::cout << _contacts[index].getPhoneNumber() << std::endl;
-    std::cout << _contacts[index].getDarkestSecret() << std::endl;
+    std::cout << "   First name      : " << _contacts[index].getFirstName() << std::endl;
+    std::cout << "   Last name       : " << _contacts[index].getLastName() << std::endl;
+    std::cout << "😎 Nickname        : " << _contacts[index].getNickname() << std::endl;
+    std::cout << "📞 Phone number    : " << _contacts[index].getPhoneNumber() << std::endl;
+    std::cout << "🕵️  Darkest secret  : " << _contacts[index].getDarkestSecret() << std::endl;
     return;
 }
+
 
 void	intputEof(void)
 {
@@ -82,6 +83,8 @@ void	PhoneBook::add(void)
 	static	int contactCount;
 	std::string	tmp;
 
+	if (contactCount == 7)
+		contactCount == 0;
 	std::cout << "Enter contact's first name :" << std::endl;
 	std::cout << "> ";
 	if (!(std::cin >> tmp))
