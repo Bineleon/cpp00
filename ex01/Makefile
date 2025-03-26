@@ -6,21 +6,33 @@
 #    By: nelbi <neleon@student.42.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 11:24:02 by nelbi             #+#    #+#              #
-#    Updated: 2025/03/24 18:01:20 by nelbi            ###   ########.fr        #
+#    Updated: 2025/03/26 11:08:13 by nelbi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 RESET				= \e[0m\033[0m
 GREEN				= \033[0;32m\e[1m
 
 NAME 				= phonebook
 CC					= c++
-FLAGS				= -Wall -Werror -Wextra -std=c++98
+FLAGS				= -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
+SRC_DIR				= .
 SRCS				= Contact.cpp PhoneBook.cpp main.cpp
 
 RM					= rm -rf
-OBJS				= ${SRCS:.cpp=.o}
+OBJS_DIR			= ./objs/
+
+OBJS_FILES 			= ${SRCS:.cpp=.o}
+
+OBJS				= ${addprefix ${OBJS_DIR}, ${OBJS_FILES}}
+
+DEPS				= ${OBJS:.o=.d}
+
+${OBJS_DIR}%.o: ${SRC_DIR}/%.cpp
+	@mkdir -p ${@D}
+	@${CC} ${FLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	@${CC} ${FLAGS} ${OBJS} -o ${NAME}
@@ -29,11 +41,13 @@ ${NAME}: ${OBJS}
 all: ${NAME}
 
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${OBJS_DIR} ${DEPS}
 	@echo "${GREEN}Clean		: DONE!${RESET}"
 
 fclean: clean
 	@${RM} ${NAME}
+
+-include ${DEPS}
 
 re: fclean all
 
